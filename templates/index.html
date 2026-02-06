@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 120px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Product Review Sentiment Analysis</h2>
+
+<textarea id="review" placeholder="Enter your review..."></textarea>
+<br>
+<button onclick="analyzeSentiment()">Analyze Sentiment</button>
+
+<div id="result"></div>
+
+<script>
+function analyzeSentiment() {
+
+    let text = document.getElementById("review").value.toLowerCase();
+
+    let positiveWords = ["good", "excellent", "amazing", "love", "great", "best"];
+    let negativeWords = ["bad", "worst", "poor", "hate", "terrible", "disappointing"];
+
+    let score = 0;
+
+    positiveWords.forEach(word => {
+        if (text.includes(word)) score++;
+    });
+
+    negativeWords.forEach(word => {
+        if (text.includes(word)) score--;
+    });
+
+    let result = document.getElementById("result");
+
+    if (score > 0) {
+        result.innerHTML = "Sentiment: Positive 😊";
+        result.style.color = "green";
+    }
+    else if (score < 0) {
+        result.innerHTML = "Sentiment: Negative 😞";
+        result.style.color = "red";
+    }
+    else {
+        result.innerHTML = "Sentiment: Neutral 😐";
+        result.style.color = "orange";
+    }
+}
+</script>
+
+</body>
+</html>
